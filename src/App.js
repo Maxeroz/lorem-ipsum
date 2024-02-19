@@ -6,7 +6,15 @@ function App() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("hello from submit");
+
+    let amount = parseInt(count);
+    if (count <= 0) {
+      amount = 1;
+    }
+    if (count > data.length) {
+      amount = data.length;
+    }
+    setText(data.slice(0, amount));
   };
 
   return (
@@ -19,25 +27,16 @@ function App() {
           name="amount"
           id="amount"
           value={count}
-          onChange={(e) => setCount(Number(e.target.value))}
+          onChange={(e) => setCount(e.target.value)}
         />
         <button className="btn" type="submit">
           generate
         </button>
       </form>
       <article className="lorem-text">
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui dicta
-          minus molestiae vel beatae natus eveniet ratione temporibus aperiam
-          harum alias officiis assumenda officia quibusdam deleniti eos
-          cupiditate dolore doloribus!
-        </p>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui dicta
-          minus molestiae vel beatae natus eveniet ratione temporibus aperiam
-          harum alias officiis assumenda officia quibusdam deleniti eos
-          cupiditate dolore doloribus!
-        </p>
+        {text.map((item, index) => (
+          <p key={index}>{item}</p>
+        ))}
       </article>
     </section>
   );
